@@ -8,6 +8,7 @@ sources:
       - name: "trips"
         description: "Scooter trips"
       - name: "users"
+      - name: "events"
 models:
   - name: "trips_prep"
     description: "Trips prepared for analysis"
@@ -36,3 +37,21 @@ models:
   - name: "parking_finish_stat"
     description: "Trip finish parking statistics by 10 m hexagons"
     
+
+  - name: "trips_users"
+    description: "Prepared trips enriched with users data"
+
+  - name: "events_clean"
+    description: "User events without duplicates"
+    config:
+      materialized: "incremental"
+  - name: "revenue_daily"
+    description: "Summary daily revenue"
+    
+  - name: "revenue_daily"
+    description: "Summary daily revenue"
+    config:
+      materialized: "incremental"
+      strategy: "merge"
+      unique_key: [ "date" ]
+      on_schema_change: append_new_columns
