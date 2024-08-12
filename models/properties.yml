@@ -26,7 +26,7 @@ models:
 
   - name: "trips_age_daily_stat"
     description: "Aggregation of daily trips statistics by user age"
-    
+
   - name: "trips_geom"
     description: "Trips prepared for geometry analysis"
     config:
@@ -36,7 +36,6 @@ models:
 
   - name: "parking_finish_stat"
     description: "Trip finish parking statistics by 10 m hexagons"
-    
 
   - name: "trips_users"
     description: "Prepared trips enriched with users data"
@@ -45,18 +44,29 @@ models:
     description: "User events without duplicates"
     config:
       materialized: "incremental"
-  - name: "revenue_daily"
-    description: "Summary daily revenue"
-    
+
+
   - name: "revenue_daily"
     description: "Summary daily revenue"
     config:
       materialized: "incremental"
       strategy: "merge"
-      unique_key: [ "date" ]
+      unique_key: ["date"]
       on_schema_change: append_new_columns
 
   - name: "trips_concurrency"
     description: "Number of simultaneous rides in time"
     config:
       materialized: "incremental"
+
+  - name: "companies"
+    description: "Scooter satistics by company"
+
+  - name: "companies_trips"
+    description: "Trip satistics by company"
+  - name: "events_full"
+    description: "User events enriched with meaningful types"
+    config:
+      materialized: "view"
+  - name: "events_stat"
+    description: "Overall user events statistics"
